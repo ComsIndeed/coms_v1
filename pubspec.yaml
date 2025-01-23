@@ -1,0 +1,59 @@
+name: coms
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  audio_waveforms: ^1.2.0
+  awesome_notifications: ^0.10.0
+  flutter:
+    sdk: flutter
+  flutter_animate: ^4.5.2
+  flutter_displaymode: ^0.6.0
+  # flutter_js: ^0.8.1
+  flutter_markdown: ^0.7.5
+  flutter_slidable: ^3.1.2
+  fluttertoast: ^8.2.10
+  google_fonts: ^6.2.1
+  google_generative_ai: ^0.4.6
+  http: ^1.2.2
+  json_pretty: ^1.0.4
+  moment_dart: ^3.1.0
+  path: ^1.9.0
+  provider: ^6.1.2
+  shared_preferences: ^2.3.4
+  uuid: ^4.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.2
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/icons/coms.png"
+  adaptive_icon_background: "#212121"
+  adaptive_icon_foreground: "assets/icons/coms.png"
+  web:
+    generate: true
+    image_path: "assets/icons/coms.png"
+  windows:
+    generate: true
+    image_path: "assets/icons/coms.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/icons/coms.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/coms_transparent.svg
+    - assets/images/coms.svg
+    - assets/icons/coms.png
