@@ -1,9 +1,12 @@
+import 'package:auth_buttons/auth_buttons.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:coms/classes/widgetList/widget_map_provider.dart';
 import 'package:coms/classes/widgetList/widgets/reminder_widget/reminder_widget.dart';
+import 'package:coms/pages/homepage/account_circle.dart';
 import 'package:coms/pages/homepage/homepage_action.dart';
 import 'package:coms/pages/homepage/input_interface.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -67,6 +70,7 @@ class _HomepageState extends State<Homepage> {
         forceMaterialTransparency: true,
         title: const HomepageAction(),
         centerTitle: true,
+        actions: const [AccountCircle()],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),

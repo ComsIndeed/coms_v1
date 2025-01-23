@@ -38,6 +38,7 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
+      themeMode: ThemeMode.dark,
       theme: ThemeData.dark(useMaterial3: true).copyWith(
         scaffoldBackgroundColor: Colors.black,
       ),

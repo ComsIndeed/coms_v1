@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:coms/classes/coms/firebase_provider.dart';
 import 'package:coms/classes/widgetList/widget_map_provider.dart';
 import 'package:coms/main_app.dart';
 import 'package:moment_dart/moment_dart.dart';
@@ -7,6 +8,7 @@ import 'package:provider/provider.dart';
 
 final context = navigatorKey.currentContext!;
 final widgetMapProvider = context.read<WidgetMapProvider>();
+final firebaseProvider = context.read<FirebaseProvider>();
 
 String getMainConversationPrompt() {
   return '''
@@ -16,7 +18,7 @@ Determine the most helpful and convenient acts of service you can perform for th
 - You are the core intelligence module that users interact with through a mobile app. 
 - The app features a dynamic user interface that you can manipulate as needed. 
 - Users can communicate with you via text, images, and audio. Your role is to understand their input and determine their intentions. 
-- The user is named Vince, a senior high school student located in the Philippines, Malabon City. 
+- The user is named ${firebaseProvider.auth.currentUser?.displayName ?? "(USER IS NOT SIGNED IN)"}.
 - The user has not yet linked their Learning Management System account. 
 - It is currently ${DateTime.now().toMoment().toLocal().LLLL}.
 - In ISO 8601, its ${DateTime.now().toLocal().toIso8601String()}

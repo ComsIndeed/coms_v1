@@ -1,5 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:coms/classes/coms/actions_handler.dart';
+import 'package:coms/classes/coms/firebase_provider.dart';
 import 'package:coms/classes/coms/main_conversation_provider.dart';
 import 'package:coms/classes/coms/terminal_provider.dart';
 import 'package:coms/classes/files/app_directory.dart';
@@ -10,6 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +43,10 @@ void main() async {
       ],
       debug: true);
 
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
@@ -60,6 +68,9 @@ void main() async {
       ),
       ChangeNotifierProvider(
         create: (context) => TerminalProvider(prefs),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => FirebaseProvider(),
       ),
     ],
     child: const MainApp(),

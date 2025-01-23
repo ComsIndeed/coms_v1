@@ -1,5 +1,6 @@
-import 'package:coms/pages/settings/settings_page.dart';
+import 'package:coms/classes/coms/firebase_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPageAction extends StatefulWidget {
   const SettingsPageAction({super.key});
@@ -11,13 +12,15 @@ class SettingsPageAction extends StatefulWidget {
 class _SettingsPageActionState extends State<SettingsPageAction> {
   @override
   Widget build(BuildContext context) {
+    final firebaseProvider = Provider.of<FirebaseProvider>(context);
+
     return TextButton(
       onPressed: () {
         Navigator.pop(context);
       },
-      child: const Text(
-        "All set, Vince",
-        style: TextStyle(color: Colors.white, fontSize: 20),
+      child: Text(
+        "All set, ${firebaseProvider.auth.currentUser?.displayName ?? "user"}",
+        style: const TextStyle(color: Colors.white, fontSize: 20),
       ),
     );
   }

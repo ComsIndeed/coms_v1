@@ -9,11 +9,18 @@ class WidgetMapProvider with ChangeNotifier {
   Map<String, Widget> _widgetMap = {};
   Map<String, Widget> get widgetMap => Map.unmodifiable(_widgetMap);
   List<Widget> get widgetList => List.unmodifiable(_widgetMap.values);
+
   Map<String, dynamic> _serializedWidgetMap = {};
   Map<String, dynamic> get serializedWidgetMap =>
       Map.unmodifiable(_serializedWidgetMap);
   List<dynamic> get serializedWidgetList =>
       List.unmodifiable(serializedWidgetMap.values);
+
+  final Map<String, dynamic> _widgetArchiveMap = {};
+  Map<String, dynamic> get widgetArchiveMap =>
+      Map.unmodifiable(_widgetArchiveMap);
+  List<String> get serializedWidgetArchiveList =>
+      List.unmodifiable(_widgetArchiveMap.values);
 
   static const _widgetPreferenceKey = "widgets";
 
@@ -75,6 +82,8 @@ class WidgetMapProvider with ChangeNotifier {
   }
 
   void removeWidget(String id) {
+    // _widgetArchiveMap[id] = _widgetMap
+
     _widgetMap.remove(id);
     _serializedWidgetMap.remove(id);
     notifyListeners();

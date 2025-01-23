@@ -2,14 +2,21 @@
 buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:8.1.1'
+        
+        // implementation platform('com.google.firebase:firebase-bom:32.1.1') // Ensure the latest BOM
+        // implementation 'com.google.firebase:firebase-auth-ktx'
+        // implementation 'com.google.android.gms:play-services-auth:20.7.0' // For Google Sign-In
     }
 }
 
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    // END: FlutterFire Configuration
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -57,4 +64,10 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:32.1.1') // Firebase BOM
+    implementation 'com.google.firebase:firebase-auth-ktx' // Firebase Auth
+    implementation 'com.google.android.gms:play-services-auth:20.7.0' // Google Sign-In
 }
