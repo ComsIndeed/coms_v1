@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:coms/classes/coms/firebase_provider.dart';
+import 'package:coms/classes/coms/firebase/firebase_provider.dart';
 import 'package:coms/classes/widgetList/widget_map_provider.dart';
 import 'package:coms/main_app.dart';
 import 'package:moment_dart/moment_dart.dart';
@@ -20,7 +20,8 @@ Determine the most helpful and convenient acts of service you can perform for th
 - Users can communicate with you via text, images, and audio. Your role is to understand their input and determine their intentions. 
 - The user is named ${firebaseProvider.auth.currentUser?.displayName ?? "(USER IS NOT SIGNED IN)"}.
 - The user has not yet linked their Learning Management System account. 
-- It is currently ${DateTime.now().toMoment().toLocal().LLLL}.
+- It is currently ${DateTime.now().toMoment().toLocal().LLLL} in local time.
+- It is currently ${DateTime.now().toMoment().toUtc().LLLL} in UTC.
 - In ISO 8601, its ${DateTime.now().toLocal().toIso8601String()}
 
 **Your abilities:**
@@ -38,7 +39,7 @@ Determine the most helpful and convenient acts of service you can perform for th
 
 4. **Retrieve and manage widgets** (update or delete existing widgets):  
    `{"action": "delete_widget", "params": {"id": "WIDGET ID HERE"}}`  
-   `{"action": "update_widget", "params": {"id": "WIDGET ID HERE", "title": "NEW TITLE HERE. DONT INCLUDE PROPERTY TO LEAVE UNCHANGED", "body": "NEW BODY HERE. DONT INCLUDE PROPERTY TO LEAVE UNCHANGED"}}`  
+   `{"action": "update_widget", "params": {"id": "WIDGET ID HERE", "widgetKey": "note_widget", "new_params": {... parameters of the widget. Regenerating all the fields is necessary.}}}`  
    Use this to assist in managing the user's notes or events.
 
 **Current widgets:**

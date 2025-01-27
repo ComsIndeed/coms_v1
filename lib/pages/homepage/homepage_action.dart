@@ -1,4 +1,4 @@
-import 'package:coms/classes/coms/firebase_provider.dart';
+import 'package:coms/classes/coms/firebase/firebase_provider.dart';
 import 'package:coms/classes/utils/get_greeting.dart';
 import 'package:coms/pages/settings/settings_page.dart';
 import 'package:flutter/material.dart';

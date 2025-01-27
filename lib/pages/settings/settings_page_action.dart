@@ -1,4 +1,4 @@
-import 'package:coms/classes/coms/firebase_provider.dart';
+import 'package:coms/classes/coms/firebase/firebase_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

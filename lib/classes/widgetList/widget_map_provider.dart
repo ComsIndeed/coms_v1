@@ -16,11 +16,17 @@ class WidgetMapProvider with ChangeNotifier {
   List<dynamic> get serializedWidgetList =>
       List.unmodifiable(serializedWidgetMap.values);
 
-  final Map<String, dynamic> _widgetArchiveMap = {};
-  Map<String, dynamic> get widgetArchiveMap =>
+  final Map<String, Widget> _widgetArchiveMap = {};
+  Map<String, Widget> get widgetArchiveMap =>
       Map.unmodifiable(_widgetArchiveMap);
-  List<String> get serializedWidgetArchiveList =>
+  List<Widget> get widgetArchiveList =>
       List.unmodifiable(_widgetArchiveMap.values);
+
+  final Map<String, dynamic> _serializedWidgetArchiveMap = {};
+  Map<String, dynamic> get serializedWidgetArchiveMap =>
+      Map.unmodifiable(_serializedWidgetArchiveMap);
+  List<Widget> get serializedWidgetArchiveList =>
+      List.unmodifiable(_serializedWidgetArchiveMap.values);
 
   static const _widgetPreferenceKey = "widgets";
 
@@ -89,6 +95,17 @@ class WidgetMapProvider with ChangeNotifier {
     notifyListeners();
 
     WidgetSerialization.removeFromPrefs(id, prefsKey: _widgetPreferenceKey);
+  }
+
+  void replaceWidget(String id, Widget replacementWidget,
+      Map<String, dynamic> serializedReplacementWidget) {
+    if (!widgetMap.containsKey(id)) throw Exception("$id does not exist");
+
+    _widgetMap[id] = replacementWidget;
+    notifyListeners();
+
+    WidgetSerialization.replaceFromPrefs(id, serializedReplacementWidget,
+        prefsKey: _widgetPreferenceKey);
   }
 
   void clear() {

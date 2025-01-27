@@ -1,3 +1,4 @@
+import 'package:coms/classes/widgetList/widgets/widget_status_indicators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
@@ -75,6 +76,8 @@ class _NoteWidgetPageState extends State<NoteWidgetPage> {
                 data: widget.body ?? "No body",
                 selectable: true,
               ),
+              const SizedBox(height: 96),
+              const WidgetStatusIndicators(),
             ],
           ),
         ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:coms/classes/widgetList/widget_map_provider.dart';
 import 'package:coms/classes/widgetList/widgets/note_widget/note_widget_page.dart';
+import 'package:coms/classes/widgetList/widgets/widget_status_indicators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 //  `{"action": "set_note", "params": {"title": "TITLE GOES HERE", "body": "BODY GOES HERE"}}`
 
 class NoteWidget extends StatelessWidget {
+  static const String widgetKey = "note_widget";
   final String id;
   final String? title;
   final String? body;
@@ -26,7 +28,7 @@ class NoteWidget extends StatelessWidget {
 
   String toJson() {
     return jsonEncode({
-      'key': 'note_widget',
+      'key': widgetKey,
       'params': {
         'id': id,
         'title': title,
@@ -82,8 +84,14 @@ class NoteWidget extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(title ?? "No title"),
-                subtitle: MarkdownBody(
-                  data: body ?? "No body",
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MarkdownBody(
+                      data: body ?? "No body",
+                    ),
+                    const WidgetStatusIndicators()
+                  ],
                 ),
               ),
             ],

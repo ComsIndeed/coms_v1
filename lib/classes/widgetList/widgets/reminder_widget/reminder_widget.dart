@@ -14,6 +14,7 @@ import 'package:moment_dart/moment_dart.dart';
 import 'package:provider/provider.dart';
 
 class ReminderWidget extends StatelessWidget {
+  static const String widgetKey = "reminder_widget";
   final String id;
   final String title;
   final String body;
@@ -44,7 +45,7 @@ class ReminderWidget extends StatelessWidget {
 
   String toJson() {
     Map<String, dynamic> serializedWidget = {
-      "key": "reminder_widget",
+      "key": widgetKey,
       "params": {
         "id": id,
         "title": title,

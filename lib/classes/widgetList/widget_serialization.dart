@@ -13,7 +13,7 @@ class WidgetSerialization {
   /// !!! HERE =========== ADD NEW WIDGETS HERE =====================
   /// !!! HERE ======================================================
   static final Map<String, Widget Function(Map<String, dynamic>)>
-      _widgetMapping = {
+      widgetMapping = {
     "note_widget": (params) => NoteWidget.fromJson(params),
     "reminder_widget": (params) => ReminderWidget.fromJson(params),
   };
@@ -25,11 +25,11 @@ class WidgetSerialization {
     final key = decodedSerializedWidget["key"];
     final params = decodedSerializedWidget["params"];
 
-    if (_widgetMapping[key] == null) {
+    if (widgetMapping[key] == null) {
       throw Exception("Widget with key $key does not exist");
     }
 
-    final widget = _widgetMapping[key]!(params);
+    final widget = widgetMapping[key]!(params);
     return widget;
   }
 
@@ -53,6 +53,17 @@ class WidgetSerialization {
     final Map<String, dynamic> serializedWidgetMap =
         jsonDecode(encodedSerializedWidgetMap);
     serializedWidgetMap.remove(id);
+    final newSerializedWidgetMap = jsonEncode(serializedWidgetMap);
+    prefs.setString(prefsKey, newSerializedWidgetMap);
+  }
+
+  static void replaceFromPrefs(String id, Map<String, dynamic> serializedWidget,
+      {required String prefsKey}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final encodedSerializedWidgetMap = prefs.getString(prefsKey) ?? "{}";
+    final Map<String, dynamic> serializedWidgetMap =
+        jsonDecode(encodedSerializedWidgetMap);
+    serializedWidgetMap[id] = serializedWidget;
     final newSerializedWidgetMap = jsonEncode(serializedWidgetMap);
     prefs.setString(prefsKey, newSerializedWidgetMap);
   }

@@ -10,6 +10,7 @@ dependencies:
   audio_waveforms: ^1.2.0
   auth_buttons: ^3.0.3
   awesome_notifications: ^0.10.0
+  cloud_firestore: ^5.6.2
   firebase_auth: ^5.4.1
   firebase_core: ^3.10.1
   flutter:
@@ -24,6 +25,7 @@ dependencies:
   google_generative_ai: ^0.4.6
   google_sign_in: ^6.2.2
   http: ^1.2.2
+  iconify_flutter: ^0.0.7
   json_pretty: ^1.0.4
   moment_dart: ^3.1.0
   path: ^1.9.0

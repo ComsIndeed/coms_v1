@@ -1,11 +1,13 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:coms/classes/coms/actions_handler.dart';
-import 'package:coms/classes/coms/firebase_provider.dart';
+import 'package:coms/classes/coms/firebase/firebase_provider.dart';
+import 'package:coms/classes/coms/firebase/widget_synchronization.dart';
 import 'package:coms/classes/coms/main_conversation_provider.dart';
 import 'package:coms/classes/coms/terminal_provider.dart';
 import 'package:coms/classes/files/app_directory.dart';
 import 'package:coms/classes/gemini/gemini_provider.dart';
 import 'package:coms/classes/widgetList/widget_map_provider.dart';
+import 'package:coms/classes/widgetList/widget_serialization.dart';
 import 'package:coms/main_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
@@ -18,9 +20,12 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterDisplayMode.setHighRefreshRate();
+  await Firebase.initializeApp();
 
   final prefs = await SharedPreferences.getInstance();
   final widgetMapProvider = WidgetMapProvider();
+
+  final firebaseProvider = FirebaseProvider();
 
   AwesomeNotifications().initialize(
       null,
@@ -42,10 +47,6 @@ void main() async {
         ),
       ],
       debug: true);
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 
   runApp(MultiProvider(
     providers: [
@@ -70,8 +71,12 @@ void main() async {
         create: (context) => TerminalProvider(prefs),
       ),
       ChangeNotifierProvider(
-        create: (context) => FirebaseProvider(),
+        create: (context) => firebaseProvider,
       ),
+      Provider(
+        create: (context) =>
+            WidgetSynchronization(widgetMapProvider, firebaseProvider),
+      )
     ],
     child: const MainApp(),
   ));

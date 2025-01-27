@@ -69,7 +69,12 @@ class _TerminalState extends State<Terminal> {
                       onPressed: () => moveIndexBy(1),
                       icon: const Icon(Icons.navigate_next)),
                   TextButton(
-                      onPressed: () => terminalProvider.clear(),
+                      onPressed: () {
+                        setState(() {
+                          currentPage = 1;
+                        });
+                        terminalProvider.clear();
+                      },
                       child: const Text("Clear"))
                 ],
               )
