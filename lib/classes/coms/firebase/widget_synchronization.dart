@@ -15,7 +15,7 @@ class WidgetSynchronization {
 
   WidgetSynchronization(this._widgetMapProvider, this._firebaseProvider);
 
-  String getWidgetPayload() {
+  String _getWidgetPayload() {
     final serializedWidgetMap = _widgetMapProvider.serializedWidgetMap;
     final serializedWidgetArchiveMap =
         _widgetMapProvider.serializedWidgetArchiveMap;
@@ -65,7 +65,7 @@ class WidgetSynchronization {
   }
 
   Future<void> uploadWidgets() async {
-    final payload = getWidgetPayload();
+    final payload = _getWidgetPayload();
 
     await _firebaseProvider.userDocument.set({"widgets": payload});
   }

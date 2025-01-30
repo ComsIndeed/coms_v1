@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:coms/classes/coms/firebase/widget_synchronization.dart';
 import 'package:coms/classes/widgetList/widget_serialization.dart';
+import 'package:coms/main_app.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WidgetMapProvider with ChangeNotifier {
@@ -52,12 +55,20 @@ class WidgetMapProvider with ChangeNotifier {
 
   void refresh() async {
     try {
+      // Get from prefs as [serializedWidgetMap]
       final prefs = await SharedPreferences.getInstance();
       final encodedSerializedWidgetMap =
           prefs.getString(_widgetPreferenceKey) ?? "{}";
       final Map<String, dynamic> serializedWidgetMap =
           jsonDecode(encodedSerializedWidgetMap);
 
+      // Get from firestore [fetchedFirestoreWidget]
+      final fetchedFirestoreWidgets = await Provider.of<WidgetSynchronization>(
+              navigatorKey.currentContext!,
+              listen: false)
+          .fetchWidgets();
+
+      // Mapping all widgets to [widgetMap]
       Map<String, Widget> widgetMap = {};
       for (final key in serializedWidgetMap.keys) {
         widgetMap[key] =

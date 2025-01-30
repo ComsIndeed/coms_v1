@@ -1,5 +1,6 @@
 import 'package:coms/classes/coms/prompts/main_conversation_prompt.dart';
 import 'package:coms/classes/widgetList/widgets/reminder_widget/reminder_widget.dart';
+import 'package:coms/pages/playgrounds/audio_record_bitrate_test.dart';
 import 'package:coms/pages/playgrounds/firebase_initialize.dart';
 import 'package:coms/pages/playgrounds/firestore_test.dart';
 import 'package:coms/pages/playgrounds/flutter_js.dart';
@@ -25,12 +26,11 @@ class PlaygroundsPage extends StatelessWidget {
           child: Column(
             children: [
               Time(),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               FirebaseInitialize(),
               FirestoreTest(),
               NotificationTest(),
+              AudioRecordBitrateTest(),
               Prompt(),
             ],
           ),

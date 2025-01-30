@@ -26,11 +26,6 @@ class ActionsHandler with ChangeNotifier {
       "create_reminder": (Map<String, dynamic> params) {
         final dateTime = DateTime.parse(params["iso8601_date"])
             .toLocal(); // 16:00:00 without a Z, given 2025-01-19T00:00:00+08:00
-        Fluttertoast.showToast(
-            msg:
-                "INPUT: ${params["iso8601_date"]}\nLOCALIZED: ${dateTime.toIso8601String()}",
-            toastLength: Toast.LENGTH_LONG);
-        // Fluttertoast.showToast(msg: "$dateTime");
         final reminderWidget = ReminderWidget(
           id: id,
           title: params["title"],
